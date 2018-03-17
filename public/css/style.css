@@ -8,10 +8,15 @@ margin: 0;
     min-height: 700px;
     display: block;
 }
-.create_network{
+.content{
+    display: block;
+    float: left;
+    margin: 20px;
+}
+.create_network, .update_device{
     display: block;
 }
-.input_content{
+.input_content, .submit{
     display: inline-block;
     margin: 15px 10px;
 }

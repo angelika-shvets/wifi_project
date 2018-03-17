@@ -34,8 +34,9 @@
 
                 <div class="input_content">
                     <select name ="device_id">
-                        <option value="1">device_1</option>
-                        <option value="2">device_2</option>
+                        @foreach($devices as $device)
+                            <option value="{{ $device->id }}">{{ $device->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -43,8 +44,37 @@
             <div class="submit">
                 <button type="submit" class="create_network_submit" >Create Network</button>
             </div>
-            <p class="response"></p>
+            <p class="response_create_network"></p>
         </form>
+        </div>
+        <div class="content">
+            <h2>Add New Device To Network</h2>
+            <form class=update_device" name ="add_new_device_to_network" novalidate="novalidate" action="" method="POST">
+
+                <div class="input_container">
+                    <div class="input_content">
+                        <select name ="id">
+                            @foreach($networks as $network)
+                                <option value="{{ $network->id }}">{{ $network->network_id }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
+                    <div class="input_content">
+                        <select name ="device_id">
+                            @foreach($devices as $device)
+                                <option value="{{ $device->id }}">{{ $device->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+                <div class="submit">
+                    <button type="submit" class="add_new_device_to_network_submit" >Add Device</button>
+                </div>
+                <p class="response_update_device"></p>
+            </form>
         </div>
     </div>
 

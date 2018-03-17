@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('/network/{id}', 'NetworksController@getNetworkByNetworkId');
 Route::post('/network/report', 'NetworksController@createNetwork');
+Route::post('/network/device', 'NetworksController@addNetworkDevice');

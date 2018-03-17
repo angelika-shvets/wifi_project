@@ -28,6 +28,11 @@ class ErrorsModel
      * @var string
      */
     private  $_network_not_created ='Network Not Created';
+
+    /**
+     * @var string
+     */
+    private  $_device_connected ='Device Connected To Network';
     /**
      * @return string
      */
@@ -58,6 +63,14 @@ class ErrorsModel
     public function getNetworkNotCreated()
     {
         return $this->_network_not_created;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeviceConnected()
+    {
+        return $this->_device_connected;
     }
 
   

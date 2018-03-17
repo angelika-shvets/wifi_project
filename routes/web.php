@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('network');
-});
+Route::get('/', 'HomeController@network');

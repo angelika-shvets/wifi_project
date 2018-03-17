@@ -9,7 +9,7 @@ namespace  App\Models;
 interface NetworkInterface
 {
     const NETWORK_ID ='network_id';
-    const id = 'id';
+    const ID = 'id';
     const THROUGHPUT = 'throughput';
     const AUTH = 'auth';
     const DEVICE_ID = 'device_id';

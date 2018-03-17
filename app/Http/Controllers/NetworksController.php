@@ -39,7 +39,6 @@ class NetworksController extends Controller
             return response()->json($this->generateError($this->getErrorsModel()->getSystemProblem()));
         }
         
-        
     }
 
     /**
@@ -57,7 +56,7 @@ class NetworksController extends Controller
 
             if ($this->verificationNetworkExist($model)) {
 
-                return response()->json($this->generateError($this->getErrorsModel()->getNetworkExist()),400);
+                return response()->json($this->generateError($this->getErrorsModel()->getNetworkExist()),200);
             }
 
             $model = $this->saveNetwork($model);
@@ -65,13 +64,35 @@ class NetworksController extends Controller
             if ($model->getId() > 0) {
                 return response()->json($this->generateSuccess($this->getSuccessModel()->getCreateNetwork()), 201);
             }
-            return response()->json($this->generateError($this->getErrorsModel()->getNetworkNotCreated()),400);
+            return response()->json($this->generateError($this->getErrorsModel()->getNetworkNotCreated()),200);
         }
         catch(\Exception $e){
             return response()->json($this->generateError($this->getErrorsModel()->getSystemProblem()),400);
         }
     }
 
+    public function addNetworkDevice(Request $request){
+
+        $model = $this->getNetworkModel()->loadFromArray($request->all());
+
+        try{
+
+            if($this->verificationNetworkDevice($model)){
+
+                return response()->json($this->generateError($this->getErrorsModel()->getDeviceConnected()),200);
+
+            }
+
+            $this->saveNetworkDevice($model);
+
+            return response()->json($this->generateSuccess($this->getSuccessModel()->getAddDevice()), 201);
+
+        }
+        catch(\Exception $e){
+            return response()->json($this->generateError($this->getErrorsModel()->getSystemProblem()),400);
+        }
+
+    }
     /**
      * @return NetworkModel
      */
@@ -97,8 +118,6 @@ class NetworksController extends Controller
 
         $networks = $this->getNewPDONetworksModel();
         return $networks::where('network_id', '=', ($model->getNetworkId()))->count();
-//        return  $networks::networkExist($model->getNetworkId())->get();
-
     }
     /**
      * @param NetworkModel $model
@@ -120,6 +139,39 @@ class NetworksController extends Controller
         }
         return $model;
 
+    }
+    /**
+     * @param NetworkModel $model
+     * @return NetworkModel $model
+     */
+    private function saveNetworkDevice($model){
+
+        $networks = $this->getNewPDONetworksModel();
+        $networks = $networks::find($model->getId());
+
+        $networks->devices()->sync([$model->getDeviceId()]);
+
+        if ($networks->id > 0) {
+
+            $model->setId($networks->id);
+        }
+        return $model;
+
+    }
+    private function verificationNetworkDevice($model){
+
+        $networks = $this->getNewPDONetworksModel();
+
+        $networks = $networks::find($model->getId());
+
+        $devices = $networks->devices()->get();
+
+        foreach ($devices as $device){
+            if($device->id == $model->getDeviceId()){
+                return true;
+            }
+        }
+        return false;
     }
     /**
      * @return ErrorsModel

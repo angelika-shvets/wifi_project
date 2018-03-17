@@ -16,6 +16,10 @@ class SuccessModel
      */
     private  $_create_network ='Network Created Successfully';
     /**
+     * @var string
+     */
+    private  $_add_device ='Device Connected To Network Successfully';
+    /**
      * @var array
      */
     private  $_update_network =[NetworkInterface::NETWORK_ID];
@@ -47,6 +51,14 @@ class SuccessModel
     public function getUpdateNetwork()
     {
         return $this->_update_network;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddDevice()
+    {
+        return $this->_add_device;
     }
    
 

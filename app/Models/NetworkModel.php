@@ -149,6 +149,9 @@ class NetworkModel
                     case NetworkInterface::NETWORK_ID:
                         $this->setNetworkId($parameter_value);
                         break;
+                    case NetworkInterface::ID:
+                        $this->setId($parameter_value);
+                        break;
                     case NetworkInterface::AUTH:
                         $this->setAuth($parameter_value);
                         break;
