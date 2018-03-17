@@ -1,0 +1,17 @@
+*, html, body{
+margin: 0;
+}
+
+.container{
+    width: 100%;
+    height: auto;
+    min-height: 700px;
+    display: block;
+}
+.create_network{
+    display: block;
+}
+.input_content{
+    display: inline-block;
+    margin: 15px 10px;
+}
